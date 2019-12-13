@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editText: EditText
     private lateinit var button: Button
     private val CODE: Int = 100
-    private lateinit var firstMsg: String
+    private lateinit var sendMsg: String
     private var name: String = "Пожалуйста, заполните поле"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +23,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun actionClick() {
         button.setOnClickListener {
-            firstMsg = editText.text.toString().trim()
-            if (firstMsg.trim().isNotEmpty()) {
+            sendMsg = editText.text.toString().trim()
+            if (sendMsg.trim().isNotEmpty()) {
                 val intent = Intent(this@MainActivity, SeconActivity::class.java)
-                intent.putExtra("key", firstMsg)
+                intent.putExtra("key", sendMsg)
                 startActivityForResult(intent, CODE)
             } else {
                 showToast(name)
@@ -47,11 +47,11 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == CODE && data != null) {
-            val newMessage = data.getStringExtra("key")
-            if (firstMsg.equals(newMessage)) {
+            val getMsg = data.getStringExtra("key")
+            if (sendMsg.equals(getMsg)) {
                 showToast("старые данные")
             } else {
-                showToast("данные изменились c $firstMsg на $newMessage")
+                showToast("данные изменились c $sendMsg на $getMsg")
             }
         }
     }

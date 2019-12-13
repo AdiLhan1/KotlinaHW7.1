@@ -17,8 +17,9 @@ class SeconActivity : AppCompatActivity() {
         initView()
         setResultIntent()
     }
-    private fun initView(){
-        editText=findViewById(R.id.editText)
+
+    private fun initView() {
+        editText = findViewById(R.id.editText)
     }
 
     private fun setResultIntent() {
@@ -27,18 +28,19 @@ class SeconActivity : AppCompatActivity() {
     }
 
     fun onClickBtn(view: View) {
-        var msg:String=editText.text.toString().trim()
-        if (msg.trim().isNotEmpty()){
+        var msg: String = editText.text.toString().trim()
+        if (msg.trim().isNotEmpty()) {
             val intent = Intent().apply {
                 putExtra("key", msg)
             }
             setResult(Activity.RESULT_OK, intent)
             finish()
-        }else{
+        } else {
             showToast()
         }
     }
-    private fun showToast(){
-        Toast.makeText(this,"Пожалуйста заполните поле",Toast.LENGTH_LONG).show()
+
+    private fun showToast() {
+        Toast.makeText(this, "Пожалуйста заполните поле", Toast.LENGTH_LONG).show()
     }
 }
